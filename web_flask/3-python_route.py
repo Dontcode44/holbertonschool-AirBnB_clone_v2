@@ -33,7 +33,7 @@ def c_text(text):
 def py_text(text="is cool"):
     """Starts web aplication
     """
-    return "Python {}".format(text.replace('_',' '))
+    return "Python {}".format(text.replace('_', ' '))
 
 
 if __name__ == "__main__":
