@@ -6,6 +6,10 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    """Index
+    Returns:
+        Text: Hello HBNB!
+    """
     return "Hello HBNB!"
 
 
