@@ -1,9 +1,11 @@
 #!/usr/bin/python3
-from fabric.api import run, env, put
+from fabric.api import *
+from datetime import datetime
+from os.path import exists
 from os import path
 
 
-env.hosts = ['54.147.56.190', '50.19.155.229']
+env.hosts = ['54.210.85.213', '54.91.141.251']
 env.user = 'ubuntu'
 
 
@@ -23,36 +25,34 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """
-    Fabric script that deploys an archive to web servers
-    """
-    if not path.exists(archive_path):
+    """Deployment process (distributing an archive to the web server"""
+
+    if not exists(archive_path):
         return False
 
     try:
-        file_path = archive_path.split('/')[1]
-        filename = file_path.split('.')[0]
-        put(archive_path, "/tmp/")
-        run('mkdir -p /data/web_static/releases/{}'.format(filename))
-        run('tar -zxf /tmp/{} -C /data/web_static/releases/{}/'
-            .format(file, filename))
-        run('rm /tmp/{}'.format(file))
-        run('mv /data/web_static/releases/{}/web_static/*\
-            /data/web_static/releases/{}/'.format(filename, filename))
-        run('rm -rf /data/web_static/releases/{}/web_static'.format(filename))
-        run('rm -rf /data/web_static/current')
-        run('ln -sf /data/web_static/releases/{}/ /data/web_static/current'
-            .format(filename))
-        print('New version deployed!')
+        file_formatted = archive_path.split(".")[0].split("/")[1]
+        folder = "/data/web_static/releases/"
+        final_path = "{}{}".format(folder, file_formatted)
+
+        put(archive_path, "/tmp/{}.tgz".format(file_formatted))
+        run("mkdir -p {}/".format(final_path))
+        run("tar -xzf /tmp/{}.tgz -C {}/".format(file_formatted, final_path))
+        run("rm /tmp/{}.tgz".format(file_formatted))
+        run("mv {}/web_static/* {}".format(final_path, final_path))
+        run("rm -rf {}/web_static".format(final_path))
+        run("rm -rf /data/web_static/current")
+        run("ln -s {} /data/web_static/current".format(final_path))
         return True
-    except Exception as e:
+
+    except Exception:
         return False
 
 
 def deploy():
-    """Fabric script to deploy archives in a web server"""
+    """Write a Fabric script (based on the file 2-do_deploy_web_static.py)"""
     file_path = do_pack()
     if not file_path:
         return False
-
-    return do_deploy(file_path)
+    vald_ = do_deploy(file_path)
+    return vald_
