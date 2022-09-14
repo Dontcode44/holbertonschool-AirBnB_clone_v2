@@ -48,8 +48,7 @@ def get_number(n):
 def template(n):
     """To see html redirection
     """
-    if type(n) is int:
-        return render_template('template.html', n)
+    return render_template('5-number.html', n=n)
 
 
 if __name__ == "__main__":
