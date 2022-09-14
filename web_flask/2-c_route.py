@@ -22,10 +22,10 @@ def hbnb():
 
 
 @app.route("/c/<text>", strict_slashes=False)
-def c_text():
+def c_text(text):
     """Put a text in the route
     """
-    return "C {}".format.replace('', '_')
+    return "C {}".format(text.replace('', '_'))
 
 
 if __name__ == "__main__":
