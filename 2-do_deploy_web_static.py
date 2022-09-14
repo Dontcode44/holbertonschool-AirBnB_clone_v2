@@ -23,6 +23,7 @@ def do_pack():
     except Exception as error:
         return None
 
+
 def do_deploy(archive_path):
     """Deployment process (distributing an archive to the web server"""
 
