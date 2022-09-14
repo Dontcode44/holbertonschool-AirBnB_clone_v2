@@ -25,7 +25,7 @@ def hbnb():
 def c_text(text):
     """Put a text in the route
     """
-    return "C {}".format(text.replace('', '_'))
+    return "C {}".format(text.replace('_', ' '))
 
 
 if __name__ == "__main__":
