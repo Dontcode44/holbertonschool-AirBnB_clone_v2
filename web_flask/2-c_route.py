@@ -1,0 +1,32 @@
+#!/usr/bin/python3
+"""0. Hello Flask!"""
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route("/", strict_slashes=False)
+def index():
+    """Index
+    Returns:
+        Text: Hello HBNB!
+    """
+    return "Hello HBNB!"
+
+
+@app.route("/hbnb", strict_slashes=False)
+def hbnb():
+    """Display HBNB
+    """
+    return "HBNB"
+
+
+@app.route("/c/<text>", strict_slashes=False)
+def c_text():
+    """Put a text in the route
+    """
+    return "C {}".format.replace('', '_')
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
