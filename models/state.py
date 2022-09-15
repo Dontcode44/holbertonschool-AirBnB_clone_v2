@@ -21,7 +21,7 @@ class State(BaseModel, Base):
 
     else:
         name = ""
-
+    if models.storage != 'db':
         @property
         def cities(self):
             """ Returns the list of City
