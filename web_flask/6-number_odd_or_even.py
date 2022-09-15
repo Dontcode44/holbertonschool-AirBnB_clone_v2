@@ -55,11 +55,12 @@ def template(n):
 def even_odd(n):
     """Return even or odd
     """
-    if n %2:
-        variable = "even"
-    else:
+    if n % 2:
         variable = "odd"
-        return render_template('6-number_odd_or_even.html', n=n, variable=variable)
+    else:
+        variable = "even"
+        return render_template('6-number_odd_or_even.html', n=n, odd_even=variable)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
